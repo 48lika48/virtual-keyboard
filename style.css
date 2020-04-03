@@ -67,3 +67,7 @@ button {
     width: 285px;
     padding-bottom: 15.5px;
 }
+
+.active {
+    background-color: aquamarine;
+}
