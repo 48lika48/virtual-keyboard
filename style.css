@@ -11,13 +11,13 @@ body {
 textarea {
     width: 690px;
     height: 150px;
-    margin: 5% 0 2% 1%;
+    margin: 5% 0 2% 0.5%;
 }
 
 .keyboard {
-    width: 720px;
-    height: 240px;
-    padding: 11px 6px;
+    width: 705px;
+    height: 230px;
+    padding: 11px 3px;
 }
 
 button {
@@ -48,11 +48,11 @@ button {
 }
 
 .caps-lock {
-    width: 100px;
+    width: 76px;
 }
 
 .enter {
-    width: 86px;
+    width: 110px;
 }
 
 .long-shift {
@@ -64,10 +64,17 @@ button {
 }
 
 .space {
-    width: 285px;
+    width: 284px;
     padding-bottom: 15.5px;
 }
 
 .active {
     background-color: aquamarine;
+    transform: translateY(1px);
+    box-shadow: 0 2px 1px rgba(125, 200, 180);
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 1px rgb(70, 70, 80);
 }
