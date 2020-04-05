@@ -178,6 +178,11 @@ document.onkeyup = function(event) {
     keyboard.childNodes[search].classList.remove('active');
 }
 
+//caret
+function getPosition(el) {
+    return el.value.slice(0, el.selectionStart).length;
+}
+
 //insert value by click
 arr.forEach(function (button) {
     return button.onmousedown = (event) => {
@@ -194,10 +199,10 @@ arr.forEach(function (button) {
             input.value = input.value + '';
         }
         else if(button.innerHTML == 'Backspace') {
-            input.value = input.value.slice(0, input.value.length - 1);
+            input.value = input.value.slice(0, el.value.slice(0, el.selectionStart).length - 1) + input.value.slice(el.value.slice(el.selectionStart).length, input.value.length);
         }
         else if(button.innerHTML == 'DEL') {
-            input.value = input.value.slice(1, input.value.length);
+            input.value = input.value.slice(0, el.value.slice(0, el.selectionStart).length) + input.value.slice(el.value.slice(el.selectionStart).length + 1, input.value.length);
         }
 
         else if (button.innerHTML == 'Caps Lock') {
