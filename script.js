@@ -38,6 +38,22 @@ let valueCapsRU = [
     'Ctrl', 'Win', 'Alt', '', 'Alt', 'Ctrl', '◄', '▼', '►'
 ]
 
+let valueShiftENG = [
+    '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace',
+    'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'DEL',
+    'Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'ENTER',
+    'Shift', '\\', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '.', ',', '/', '⯅', 'Shift',
+    'Ctrl', 'Win', 'Alt', '', 'Alt', 'Ctrl', '◄', '▼', '►'
+]
+
+let valueShiftRU = [
+    'Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace',
+    'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'DEL',
+    'Caps Lock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'ENTER',
+    'Shift', '\\', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '.', '⯅', 'Shift',
+    'Ctrl', 'Win', 'Alt', '', 'Alt', 'Ctrl', '◄', '▼', '►'
+]
+
 let body = document.querySelector('body');
 
 //input
@@ -86,7 +102,6 @@ let arr = document.querySelectorAll('button');
 document.addEventListener('keydown', (event) => {
     if (event.ctrlKey && event.shiftKey) {
         if (arr[44].innerHTML == 'z') {
-            
             arr.forEach(function(currentValue, index){
                 return currentValue.innerHTML = valueRU[index];
             })
@@ -95,7 +110,6 @@ document.addEventListener('keydown', (event) => {
             arr.forEach(function(currentValue, index){
                 return currentValue.innerHTML = valueENG[index];
             })
-            return arr;
         }
     }
 
@@ -121,6 +135,30 @@ document.addEventListener('keydown', (event) => {
             })
         }
     }
+
+    if (event.shiftKey && event.ctrlKey == false) {
+        if (arr[44].innerHTML == 'z') {
+            arr.forEach(function(currentValue, index){
+                return currentValue.innerHTML = valueShiftENG[index];
+            })
+        }
+        else if(arr[44].innerHTML == 'я') {
+            arr.forEach(function(currentValue, index){
+                return currentValue.innerHTML = valueShiftRU[index];
+            })
+        }
+        else if (arr[44].innerHTML == 'Z') {
+            arr.forEach(function(currentValue, index){
+                return currentValue.innerHTML = valueENG[index];
+            })
+        }
+        else /*(arr[44].innerHTML == 'Я')*/ {
+            arr.forEach(function(currentValue, index){
+                return currentValue.innerHTML = valueRU[index];
+            })
+            return arr;
+        }
+    }
 });
 
 //button backlighting
@@ -144,9 +182,6 @@ arr.forEach(function (button) {
         }
         else if(button.innerHTML == 'ENTER') {
             input.value = input.value + '\n';
-        }
-        else if(button.innerHTML == 'Shift') {
-            input.value = input.value + '';
         }
         else if(button.innerHTML == 'Ctrl' || button.innerHTML == 'Win' || button.innerHTML == 'Alt') {
             input.value = input.value + '';
@@ -181,8 +216,32 @@ arr.forEach(function (button) {
             }
         }
 
+        else if (button.innerHTML == 'Shift') {
+            if (arr[44].innerHTML == 'z') {
+                arr.forEach(function(currentValue, index){
+                    return currentValue.innerHTML = valueShiftENG[index];
+                })
+            }
+            else if(arr[44].innerHTML == 'я') {
+                arr.forEach(function(currentValue, index){
+                    return currentValue.innerHTML = valueShiftRU[index];
+                })
+            }
+            else if (arr[44].innerHTML == 'Z') {
+                arr.forEach(function(currentValue, index){
+                    return currentValue.innerHTML = valueENG[index];
+                })
+            }
+            else /*(arr[44].innerHTML == 'Я')*/ {
+                arr.forEach(function(currentValue, index){
+                    return currentValue.innerHTML = valueRU[index];
+                })
+                return arr;
+            }
+        }
+
         else {
-        input.value = input.value + button.innerHTML;
+            input.value = input.value + button.innerHTML;
         }
     }
 });
