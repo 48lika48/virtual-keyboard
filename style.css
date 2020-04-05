@@ -30,6 +30,10 @@ button {
     margin: 3px 3px;
 }
 
+button:focus {
+    outline: 0;
+}
+
 .dark {
     background-color: #1C232E;
     color: gray;

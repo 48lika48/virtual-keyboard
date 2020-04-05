@@ -67,6 +67,10 @@ function setFocus() {
     document.getElementById('name').focus();
 }
 
+input.onblur = function() {
+    document.getElementById('name').focus();
+}
+
 //keyboard
 let keyboard = document.createElement('section');
 keyboard.className = 'keyboard';
@@ -156,8 +160,11 @@ document.addEventListener('keydown', (event) => {
             arr.forEach(function(currentValue, index){
                 return currentValue.innerHTML = valueRU[index];
             })
-            return arr;
         }
+    }
+
+    if (event.key == 'Alt') {
+        event.preventDefault();
     }
 });
 
