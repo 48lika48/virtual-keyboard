@@ -257,3 +257,11 @@ arr.forEach(function (button) {
         }
     }
 });
+
+let os = document.createElement('p');
+os.innerHTML = 'Клавиатура создана на ОС Windows.';
+body.appendChild(os);
+
+let combination = document.createElement('p');
+combination.innerHTML = 'Для переключения языка нажмите Ctrl + Shift.';
+body.appendChild(combination);

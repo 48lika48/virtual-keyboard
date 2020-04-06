@@ -17,7 +17,7 @@ textarea {
 .keyboard {
     width: 705px;
     height: 230px;
-    padding: 11px 3px;
+    padding: 11px 3px 44px 3px;
 }
 
 button {
@@ -81,4 +81,9 @@ button:focus {
 button:active {
     transform: translateY(2px);
     box-shadow: 0 2px 1px rgb(70, 70, 80);
+}
+
+p {
+    color: blue;
+    padding: 2px 5px;;
 }
