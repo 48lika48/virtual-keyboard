@@ -101,6 +101,16 @@ keyboard.childNodes[62].className = 'dark';
 keyboard.childNodes[63].className = 'dark';
 keyboard.childNodes[64].className = 'dark';
 
+//button backlighting
+document.onkeydown = function(event) {
+    let search = eventCode.indexOf(event.code);
+    keyboard.childNodes[search].classList.add('active');
+}
+document.onkeyup = function(event) {
+    let search = eventCode.indexOf(event.code);
+    keyboard.childNodes[search].classList.remove('active');
+}
+
 //change language
 let arr = document.querySelectorAll('button');
 document.addEventListener('keydown', (event) => {
@@ -163,46 +173,61 @@ document.addEventListener('keydown', (event) => {
         }
     }
 
+    if (event.key == 'Tab') {
+        let caret = getPosition(input);
+        input.value = input.value.slice(0, getPosition(input)) + '    ' + input.value.slice(getPosition(input), input.value.length);
+        setPosition(input, caret + 4);
+    }
+
     if (event.key == 'Alt') {
         event.preventDefault();
     }
 });
 
-//button backlighting
-document.onkeydown = function(event) {
-    let search = eventCode.indexOf(event.code);
-    keyboard.childNodes[search].classList.add('active');
-}
-document.onkeyup = function(event) {
-    let search = eventCode.indexOf(event.code);
-    keyboard.childNodes[search].classList.remove('active');
-}
-
 //caret
-function getPosition(el) {
-    return el.value.slice(0, el.selectionStart).length;
+function getPosition(item) {
+    return item.value.slice(0, item.selectionStart).length;
+}
+function setPosition(item, position) {
+    if (item.setSelectionRange) {
+        item.setSelectionRange(position, position);
+    }
 }
 
 //insert value by click
 arr.forEach(function (button) {
     return button.onmousedown = (event) => {
+        let caret = getPosition(input);
         if(button.innerHTML == 'Tab') {
-            input.value = input.value + '    ';
+            input.value = input.value.slice(0, getPosition(input)) + '    ' + input.value.slice(getPosition(input), input.value.length);
+            setPosition(input, caret + 4);
         }
         else if(button.innerHTML == '') {
-            input.value = input.value + ' ';
+            input.value = input.value.slice(0, getPosition(input)) + ' ' + input.value.slice(getPosition(input), input.value.length);
+            setPosition(input, caret + 1);
         }
         else if(button.innerHTML == 'ENTER') {
-            input.value = input.value + '\n';
+            input.value = input.value.slice(0, getPosition(input)) + '\n' + input.value.slice(getPosition(input), input.value.length);
+            setPosition(input, caret + 1);
         }
         else if(button.innerHTML == 'Ctrl' || button.innerHTML == 'Win' || button.innerHTML == 'Alt') {
             input.value = input.value + '';
         }
+
         else if(button.innerHTML == 'Backspace') {
-            input.value = input.value.slice(0, el.value.slice(0, el.selectionStart).length - 1) + input.value.slice(el.value.slice(el.selectionStart).length, input.value.length);
+            input.value = input.value.slice(0, getPosition(input) - 1) + input.value.slice(getPosition(input), input.value.length);
+            setPosition(input, caret - 1);
         }
         else if(button.innerHTML == 'DEL') {
-            input.value = input.value.slice(0, el.value.slice(0, el.selectionStart).length) + input.value.slice(el.value.slice(el.selectionStart).length + 1, input.value.length);
+            input.value = input.value.slice(0, getPosition(input)) + input.value.slice(getPosition(input) + 1, input.value.length);
+            setPosition(input, caret);
+        }
+
+        else if(button.innerHTML == '◄') {
+            setPosition(input, getPosition(input) - 1);
+        }
+        else if(button.innerHTML == '►') {
+            setPosition(input, getPosition(input) + 1);
         }
 
         else if (button.innerHTML == 'Caps Lock') {
@@ -253,7 +278,8 @@ arr.forEach(function (button) {
         }
 
         else {
-            input.value = input.value + button.innerHTML;
+            input.value = input.value.slice(0, getPosition(input)) + button.innerHTML + input.value.slice(getPosition(input), input.value.length);
+            setPosition(input, caret + 1);
         }
     }
 });
