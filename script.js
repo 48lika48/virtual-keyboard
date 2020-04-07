@@ -42,7 +42,7 @@ const valueShiftENG = [
   '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace',
   'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'DEL',
   'Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'ENTER',
-  'Shift', '\\', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '.', ',', '/', '⯅', 'Shift',
+  'Shift', '\\', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '⯅', 'Shift',
   'Ctrl', 'Win', 'Alt', '', 'Alt', 'Ctrl', '◄', '▼', '►',
 ];
 
@@ -50,7 +50,7 @@ const valueShiftRU = [
   'Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace',
   'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'DEL',
   'Caps Lock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'ENTER',
-  'Shift', '\\', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '.', '⯅', 'Shift',
+  'Shift', '\\', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '⯅', 'Shift',
   'Ctrl', 'Win', 'Alt', '', 'Alt', 'Ctrl', '◄', '▼', '►',
 ];
 
@@ -257,6 +257,15 @@ arr.forEach((button) => {
           currentValue.innerHTML = valueRU[index];
         });
       }
+    } else if (button.innerHTML === '&amp;') {
+      input.value = `${input.value.slice(0, caret)}&${input.value.slice(caret, input.value.length)}`;
+      setPosition(input, caret + 1);
+    } else if (button.innerHTML === '&lt;') {
+      input.value = `${input.value.slice(0, caret)}<${input.value.slice(caret, input.value.length)}`;
+      setPosition(input, caret + 1);
+    } else if (button.innerHTML === '&gt;') {
+      input.value = `${input.value.slice(0, caret)}>${input.value.slice(caret, input.value.length)}`;
+      setPosition(input, caret + 1);
     } else {
       const b = button.innerHTML;
       input.value = input.value.slice(0, caret) + b + input.value.slice(caret, input.value.length);
