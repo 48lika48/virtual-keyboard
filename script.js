@@ -267,8 +267,8 @@ arr.forEach((button) => {
       input.value = `${input.value.slice(0, caret)}>${input.value.slice(caret, input.value.length)}`;
       setPosition(input, caret + 1);
     } else {
-      const b = button.innerHTML;
-      input.value = input.value.slice(0, caret) + b + input.value.slice(caret, input.value.length);
+      const x = button.innerHTML;
+      input.value = input.value.slice(0, caret) + x + input.value.slice(caret, input.value.length);
       setPosition(input, caret + 1);
     }
     return arr;
